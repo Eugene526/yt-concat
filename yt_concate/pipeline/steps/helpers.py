@@ -6,7 +6,7 @@ from yt_concate.settings import API_KEY
 
 
 class Helper(Step):
-    def process(self, data, inputs):
+    def process(self, data, inputs, utils):
         api_key = API_KEY
         channel_id = inputs['channel_id']
         channel_url = 'https://www.googleapis.com/youtube/v3/channels?key={}&id={}&part=contentDetails'.format(api_key,
