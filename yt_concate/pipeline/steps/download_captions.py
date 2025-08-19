@@ -4,34 +4,35 @@ import time
 
 from .step import Step, StepException
 
+
 class DownloadCaptions(Step):
     def process(self, data, inputs, utils):
         start = time.time()
-
-        ydl_opts = {
-            "skip_download": True,
-            "writesubtitles": True,
-            "writeautomaticsub": True,
-            "subtitleslangs": ["en"],
-            "subtitlesformat": "srt",
-            # 先用不帶副檔名的 outtmpl
-            "outtmpl": {"default": utils.get_caption_filepath("%(id)s").replace(".txt", "")},
-            "quiet": False,
-        }
-
-        for url in data:
-            print("downloading caption for", url)
-
-            if utils.caption_file_exist(url):
-                print("Found existing caption file")
+        for yt in data:
+            if utils.caption_file_exist(yt):
+                print("Found existing caption file for", yt.id)
                 continue
+
+            print("downloading caption for", yt.id)
+
+            ydl_opts = {
+                "skip_download": True,
+                "writesubtitles": True,
+                "writeautomaticsub": True,
+                "subtitleslangs": ["en"],
+                "subtitlesformat": "srt",
+                # 先用不帶副檔名的 outtmpl
+                "outtmpl": {"default": yt.get_caption_filepath().replace(".txt", "")},
+                "quiet": True,
+                "no_warnings": True
+            }
 
             try:
                 with YoutubeDL(ydl_opts) as ydl:
-                    ydl.download([url])
+                    ydl.download([yt.url])
 
                 # 下載下來的會是 "<base>.en.srt"
-                base_path = utils.get_caption_filepath(url).replace(".txt", "")
+                base_path = yt.get_caption_filepath().replace(".txt", "")
                 srt_path = base_path + ".en.srt"
                 txt_path = base_path + ".txt"
 
@@ -50,3 +51,5 @@ class DownloadCaptions(Step):
 
         end = time.time()
         print("took", end - start)
+
+        return data
