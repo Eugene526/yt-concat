@@ -18,7 +18,7 @@ class DownloadVideos(Step):
             print('downloading', url)
 
             ydl_opts = {
-                "format": "best",  # 可以換成 'best' 選最好的畫質
+                "format": "mp4",  # 可以換成 'best' 選最好的畫質
                 "outtmpl": f"{VIDEOS_DIR}/{yt.id}.%(ext)s",  # 指定輸出路徑與檔名
                 "quiet": False
             }
