@@ -22,7 +22,7 @@ class DownloadCaptions(Step):
                 "writeautomaticsub": True,
                 "subtitleslangs": ["en"],
                 "subtitlesformat": "srt",
-                "outtmpl": {"default": yt.get_caption_filepath().replace(".txt", "")},
+                "outtmpl": {"default": yt.caption_filepath.replace(".txt", "")},
                 "quiet": True,
                 "no_warnings": True
             }
