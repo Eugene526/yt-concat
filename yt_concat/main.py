@@ -57,6 +57,7 @@ def main():
         'search_word': '',
         'limit': 20,
         'cleanup': False,
+        'api_key': '',
     }
 
     def print_usage():
@@ -68,9 +69,10 @@ def main():
             '-s', '--searchword', 'Search keyword used to find matching segments in subtitles.'))
         print('{:>6} {:<12}{}'.format(
             '-l', '--limit', 'The maximum number of fragments extracted based on keywords.'))
+        print('{:>6} {:<12}{}'.format('-a', '--apikey', 'Set your YouTube API key.'))
 
-    short_opts = 'c:s:l:h'
-    long_opts = 'channel= cleanup searchword= limit= help'.split()
+    short_opts = 'c:s:l:ha:'
+    long_opts = 'channel= cleanup searchword= limit= help apikey='.split()
 
     try:
         opts, _ = getopt.getopt(sys.argv[1:], short_opts, long_opts)
@@ -90,6 +92,8 @@ def main():
             inputs['limit'] = arg
         elif '--cleanup' in opt:
             inputs['cleanup'] = True
+        elif opt in ('-a', '--apikey'):
+            inputs['api_key'] = arg
 
     if not inputs['channel_id']:
         print_usage()

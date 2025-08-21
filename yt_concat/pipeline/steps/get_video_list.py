@@ -10,7 +10,7 @@ from yt_concat.pipeline.steps.helpers import Helper
 class GetVideoList(Step):
     def process(self, data, inputs, utils, logger):
         channel_id = inputs['channel_id']
-        api_key = API_KEY
+        api_key = inputs['api_key']
 
         if utils.video_list_file_exists(channel_id):
             logger.info('Found existing video list file for channel id')

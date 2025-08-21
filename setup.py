@@ -18,7 +18,7 @@ URL = 'https://github.com/Eugene526/yt-concate/tree/main'
 EMAIL = 'null4047699@gmail.com'
 AUTHOR = 'Eugene Chan'
 REQUIRES_PYTHON = '>=3.12.0'
-VERSION = '0.1.3'
+VERSION = '0.1.6'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

@@ -35,21 +35,20 @@ Command Syntax:
 python main.py -c <channel_id> -s <search_word> 
 ```
 | Short Option | Long Option  | Description                                                             |
-| ------------ | ------------ | ----------------------------------------------------------------------- |
+|--------------|--------------|-------------------------------------------------------------------------|
 | -c           | --channel    | (Required) The YouTube channel ID to process.                           |
 | -s           | --searchword | (Required) Keyword to find matching segments in captions.               |
 | -l           | --limit      | (Optional) Maximum number of fragments to extract based on the keyword. |
 |              | --cleanup    | (Optional) Automatically remove all downloaded files after processing.  |
+| -a           | --apikey     | (Required) Set your YouTube api key.                                    |
 
 ## Examples
 
 **Basic Usage:**
 Search the specified channel for all instances of "AI" and create a single video from the found clips.
 
-Adding a Clip Limit and Cleanup:
-Find up to 10 clips containing the word "Python" and delete all temporary files after the final video is created.
 ```bash
-python main.py -c UCjD_v1n9V7k-jQ8m_p3h9Jg -s "Python" -l 10 --cleanup
+python main.py -c UCjD_v1n9V7k-jQ8m_p3h9Jg -s "AI" -l 10 -a YOUR_API_KEY
 ```
 
 ## 📄 License
