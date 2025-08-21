@@ -1,21 +1,22 @@
 from yt_dlp import YoutubeDL
+import logging
 
 from .step import Step
 from yt_concate.settings import VIDEOS_DIR
 
 
 class DownloadVideos(Step):
-    def process(self, data, inputs, utils):
+    def process(self, data, inputs, utils, logger):
         yt_set = set([found.yt for found in data])
-        print('videos to download=', len(yt_set))
+        logger.debug('videos to download=', len(yt_set))
 
         for yt in yt_set:
             url = yt.url
             if utils.video_file_exists(yt):
-                print(f'found existing video file for {url}, skipping')
+                logger.debug(f'found existing video file for {url}, skipping')
                 continue
 
-            print('downloading', url)
+            logger.info('downloading', url)
 
             ydl_opts = {
                 "format": "mp4",  # 可以換成 'best' 選最好的畫質
@@ -27,7 +28,7 @@ class DownloadVideos(Step):
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([url])
             except Exception as e:
-                print("Error downloading", url, ":", e)
+                logger.warning("Error downloading", url, ":", e)
                 continue
 
         return data

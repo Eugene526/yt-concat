@@ -1,19 +1,20 @@
 from yt_dlp import YoutubeDL
 import os
 import time
+import logging
 
 from .step import Step, StepException
 
 
 class DownloadCaptions(Step):
-    def process(self, data, inputs, utils):
+    def process(self, data, inputs, utils, logger):
         start = time.time()
         for yt in data:
             if utils.caption_file_exist(yt):
-                print("Found existing caption file for", yt.id)
+                logger.debug(f"Found existing caption file for {yt.id}")
                 continue
 
-            print("downloading caption for", yt.id)
+            logger.debug(f"Downloading caption for {yt.id}")
 
             ydl_opts = {
                 "skip_download": True,
@@ -21,7 +22,6 @@ class DownloadCaptions(Step):
                 "writeautomaticsub": True,
                 "subtitleslangs": ["en"],
                 "subtitlesformat": "srt",
-                # 先用不帶副檔名的 outtmpl
                 "outtmpl": {"default": yt.get_caption_filepath().replace(".txt", "")},
                 "quiet": True,
                 "no_warnings": True
@@ -31,7 +31,6 @@ class DownloadCaptions(Step):
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([yt.url])
 
-                # 下載下來的會是 "<base>.en.srt"
                 base_path = yt.get_caption_filepath().replace(".txt", "")
                 srt_path = base_path + ".en.srt"
                 txt_path = base_path + ".txt"
@@ -43,13 +42,12 @@ class DownloadCaptions(Step):
                     with open(txt_path, "w", encoding="utf-8") as txt_file:
                         txt_file.write(content)
 
-                    os.remove(srt_path)  # 刪掉原始 srt 檔
+                    os.remove(srt_path)
 
             except Exception as e:
-                print("Error:", e)
+                logger.warning(f"Error downloading {yt.id}: {e}")
                 continue
 
         end = time.time()
-        print("took", end - start)
-
+        logger.info(f"Took {end - start:.2f} seconds to download captions")
         return data
