@@ -19,9 +19,9 @@ class EditVideo(Step):
                     video = clip.subclipped(start, safe_end)
                     clips.append(video)
                 else:
-                    logger.debug("Skip invalid range", start, safe_end)
+                    logger.debug(f"Skip invalid range, {start} {safe_end}")
             else:
-                logger.warning("Skip, start >= duration", duration)
+                logger.warning(f"Skip, start >= duration {duration}")
 
             if len(clips) >= inputs['limit']:
                 break

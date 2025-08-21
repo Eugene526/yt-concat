@@ -28,7 +28,7 @@ class DownloadVideos(Step):
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([url])
             except Exception as e:
-                logger.warning("Error downloading", url, ":", e)
+                logger.warning(f"Error downloading {url}: {e}")
                 continue
 
         return data
