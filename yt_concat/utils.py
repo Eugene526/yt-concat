@@ -1,9 +1,9 @@
 import os
 
-from yt_concate.settings import DOWNLOADS_DIR, OUTPUTS_DIR
-from yt_concate.settings import VIDEOS_DIR
-from yt_concate.settings import CAPTIONS_DIR
-from yt_concate.settings import OUTPUTS_DIR
+from yt_concat.settings import DOWNLOADS_DIR, OUTPUTS_DIR
+from yt_concat.settings import VIDEOS_DIR
+from yt_concat.settings import CAPTIONS_DIR
+from yt_concat.settings import OUTPUTS_DIR
 
 
 class Utils:

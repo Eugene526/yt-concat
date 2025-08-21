@@ -2,7 +2,7 @@ from yt_dlp import YoutubeDL
 import logging
 
 from .step import Step
-from yt_concate.settings import VIDEOS_DIR
+from yt_concat.settings import VIDEOS_DIR
 
 
 class DownloadVideos(Step):

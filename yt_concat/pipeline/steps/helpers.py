@@ -2,8 +2,8 @@ import urllib.request
 import json
 import logging
 
-from yt_concate.pipeline.steps.step import Step, StepException
-from yt_concate.settings import API_KEY
+from yt_concat.pipeline.steps.step import Step, StepException
+from yt_concat.settings import API_KEY
 
 
 class Helper(Step):

@@ -1,5 +1,5 @@
 from .step import Step
-from yt_concate.model.yt import YT
+from yt_concat.model.yt import YT
 
 
 class InitializeYT(Step):

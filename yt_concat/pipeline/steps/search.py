@@ -1,7 +1,7 @@
 import logging
 
 from .step import Step
-from yt_concate.model.found import Found
+from yt_concat.model.found import Found
 
 
 class Search(Step):
